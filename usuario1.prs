@@ -1,0 +1,8 @@
+Word.exe, 15, 10, ejecutable, exe, No
+Musica.mp3, 12, 12, multimedia, sonido
+Tesis.doc, 10, 8, documento, texto plano
+Juego.exe, 20, 20, ejecutable, exe, Si
+Video.mp4, 20, 15, multimedia, video
+Data.bat, 11, 5, ejecutable, bat, No
+Pelicula.mkv, 20, 20, multimedia, ambos
+Notas.txt, 10, 5, documento, cifrado

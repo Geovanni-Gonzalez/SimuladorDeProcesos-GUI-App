@@ -1,0 +1,30 @@
+{
+    "project": "Simulador de Procesos OS",
+    "tech": [
+        "Java",
+        "Swing/JavaFX",
+        "Multithreading"
+    ],
+    "features": [
+        "Real-time Process Life-cycle Visualization",
+        "CPU Scheduling Algorithm Simulation (FCFS, Round Robin, etc.)",
+        "Dynamic Gantt Chart Generation",
+        "Memory Allocation Tracking",
+        "Interactive Process Injection Interface"
+    ],
+    "stack": {
+        "language": "Java",
+        "framework": "Native GUI",
+        "tools": [
+            "JDK 11+",
+            "Maven/Gradle",
+            "Git"
+        ],
+        "database": "In-memory Process Table"
+    },
+    "screenshots": [],
+    "description": {
+        "es": "Aplicación gráfica de usuario que simula la ejecución y planificación de procesos en un sistema operativo, permitiendo visualizar el comportamiento del CPU en tiempo real.",
+        "en": "GUI application simulating process execution and scheduling within an operating system, visualizing CPU behavior in real-time."
+    }
+}
