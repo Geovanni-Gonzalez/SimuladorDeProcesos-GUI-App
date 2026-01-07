@@ -1,30 +1,31 @@
 {
     "project": "Simulador de Procesos OS",
+    "description": {
+        "es": "Simulador gráfico de gestión de procesos de sistema operativo desarrollado en Java (Swing), diseñado para visualizar el comportamiento de algoritmos de planificación y gestión de memoria en tiempo real.",
+        "en": "GUI-based OS process management simulator developed in Java (Swing), designed to visualize scheduling algorithms and memory management behavior in real-time."
+    },
     "tech": [
         "Java",
-        "Swing/JavaFX",
+        "Swing",
         "Multithreading"
     ],
     "features": [
-        "Real-time Process Life-cycle Visualization",
-        "CPU Scheduling Algorithm Simulation (FCFS, Round Robin, etc.)",
-        "Dynamic Gantt Chart Generation",
-        "Memory Allocation Tracking",
-        "Interactive Process Injection Interface"
+        "Carga masiva de procesos mediante archivos .prs",
+        "Simulación de planificación Round Robin con soporte multinúcleo (1-4 CPUs)",
+        "Gestión de Memoria con estrategia First-Fit (128 bloques)",
+        "Visualización gráfica del estado de la memoria y colas de procesos",
+        "Controles de ejecución: Iniciar, Pausar, Reiniciar",
+        "Soporte para tipos de procesos: Ejecutable, Multimedia y Documento",
+        "Validación de recursos y gestión de estados de procesos (Listo, Ejecución, Espera, Finalizado)"
     ],
     "stack": {
         "language": "Java",
-        "framework": "Native GUI",
+        "framework": "Swing",
         "tools": [
             "JDK 11+",
-            "Maven/Gradle",
-            "Git"
+            "Maven"
         ],
-        "database": "In-memory Process Table"
+        "database": "N/A"
     },
-    "screenshots": [],
-    "description": {
-        "es": "Aplicación gráfica de usuario que simula la ejecución y planificación de procesos en un sistema operativo, permitiendo visualizar el comportamiento del CPU en tiempo real.",
-        "en": "GUI application simulating process execution and scheduling within an operating system, visualizing CPU behavior in real-time."
-    }
+    "screenshots": []
 }

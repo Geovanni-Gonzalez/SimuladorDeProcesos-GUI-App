@@ -108,4 +108,31 @@ public class Simulador {
         todos.addAll(procesosFinalizados);
         return todos;
     }
+
+    public void reiniciar() {
+        this.memoria = new Memoria();
+        this.cpus = new ArrayList<>();
+        for (int i = 0; i < cantidadCPUs; i++) {
+            cpus.add(new CPU(i + 1));
+        }
+        this.colaEntrada = new ArrayList<>();
+        this.procesosEnMemoria = new ArrayList<>();
+        this.procesosFinalizados = new ArrayList<>();
+        this.nextId = 256;
+    }
+
+    public String getEstadisticas() {
+        int total = procesosEnMemoria.size() + colaEntrada.size() + procesosFinalizados.size();
+        int finalizados = procesosFinalizados.size();
+        int memoriaUsada = memoria.getEspaciosOcupados();
+        int memoriaTotal = Memoria.TAMANO_MEMORIA;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Total Procesos: ").append(total).append(" | ");
+        sb.append("Finalizados: ").append(finalizados).append(" | ");
+        sb.append("Memoria: ").append(memoriaUsada).append("/").append(memoriaTotal).append(" (")
+                .append(memoriaTotal > 0 ? (memoriaUsada * 100 / memoriaTotal) : 0).append("%)");
+
+        return sb.toString();
+    }
 }

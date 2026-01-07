@@ -18,14 +18,20 @@ public class VentanaPrincipal extends JFrame {
     private VistaMemoria vistaMemoria;
     private JPanel panelCPUs;
     private JSpinner spinnerCPUs;
+
     private JButton btnCargar;
     private JButton btnAsignar;
     private JButton btnEjecutar;
+    private JButton btnPausar;
+    private JButton btnReiniciar;
+
+    private JLabel lblEstadisticas;
+    private boolean pausado = false;
 
     public VentanaPrincipal() {
         super("Simulador de Procesos OS - Proyecto GUI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 800);
+        setSize(1200, 850);
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -51,13 +57,19 @@ public class VentanaPrincipal extends JFrame {
         btnCargar = styledButton("Cargar Archivos PRS", new Color(70, 130, 180));
         btnAsignar = styledButton("Asignar Recursos", new Color(255, 165, 0));
         btnEjecutar = styledButton("Ejecutar Simulación", new Color(50, 205, 50));
+        btnPausar = styledButton("Pausar", new Color(220, 20, 60)); // Crimson
+        btnReiniciar = styledButton("Reiniciar", Color.GRAY);
 
         btnAsignar.setEnabled(false);
         btnEjecutar.setEnabled(false);
+        btnPausar.setEnabled(false);
+        btnReiniciar.setEnabled(false);
 
         panelTop.add(btnCargar);
         panelTop.add(btnAsignar);
         panelTop.add(btnEjecutar);
+        panelTop.add(btnPausar);
+        panelTop.add(btnReiniciar);
 
         add(panelTop, BorderLayout.NORTH);
 
@@ -82,28 +94,44 @@ public class VentanaPrincipal extends JFrame {
         splitCenter.setOneTouchExpandable(true);
         add(splitCenter, BorderLayout.CENTER);
 
-        // Bottom Panel: CPUs
+        // Bottom Panel: CPUs and Stats
+        JPanel panelBottom = new JPanel(new BorderLayout());
+
         panelCPUs = new JPanel(); // To be populated
         JScrollPane scrollCPUs = new JScrollPane(panelCPUs);
         scrollCPUs.setPreferredSize(new Dimension(1000, 220));
         scrollCPUs.setBorder(BorderFactory.createTitledBorder("Monitor de CPUs"));
-        add(scrollCPUs, BorderLayout.SOUTH);
+        panelBottom.add(scrollCPUs, BorderLayout.CENTER);
+
+        // Stats bar
+        lblEstadisticas = new JLabel("Estadísticas: -");
+        lblEstadisticas.setFont(new Font("Consolas", Font.BOLD, 14));
+        lblEstadisticas.setBorder(new EmptyBorder(5, 10, 5, 10));
+        lblEstadisticas.setOpaque(true);
+        lblEstadisticas.setBackground(new Color(230, 230, 250)); // Lavender
+        panelBottom.add(lblEstadisticas, BorderLayout.SOUTH);
+
+        add(panelBottom, BorderLayout.SOUTH);
 
         // Actions
         btnCargar.addActionListener(e -> cargarArchivos());
         btnAsignar.addActionListener(e -> asignarRecursos());
         btnEjecutar.addActionListener(e -> iniciarSimulacion());
+        btnPausar.addActionListener(e -> pausarSimulacion());
+        btnReiniciar.addActionListener(e -> reiniciarSimulacion());
     }
 
     private JButton styledButton(String text, Color baseColor) {
         JButton btn = new JButton(text);
         btn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         btn.setFocusPainted(false);
+        // btn.setBackground(baseColor); // Swing standard buttons handle focus/hover
+        // better without forced bg usually, unless implementing UI delegate
         return btn;
     }
 
     private void cargarArchivos() {
-        JFileChooser fileChooser = new JFileChooser("."); // Start in current dir to find usuario1.prs easily
+        JFileChooser fileChooser = new JFileChooser(".");
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
             public boolean accept(File f) {
@@ -162,6 +190,13 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void iniciarSimulacion() {
+        if (pausado) {
+            pausado = false;
+            btnPausar.setText("Pausar");
+            timer.start();
+            return;
+        }
+
         if (timer != null && timer.isRunning())
             return;
 
@@ -170,8 +205,45 @@ public class VentanaPrincipal extends JFrame {
             actualizarVistas();
         });
         timer.start();
-        btnEjecutar.setText("Simulación en curso...");
         btnEjecutar.setEnabled(false);
+        btnPausar.setEnabled(true);
+        btnReiniciar.setEnabled(true);
+        btnCargar.setEnabled(false);
+    }
+
+    private void pausarSimulacion() {
+        if (timer != null && timer.isRunning()) {
+            timer.stop();
+            pausado = true;
+            btnPausar.setText("Reanudar");
+        } else if (pausado) {
+            iniciarSimulacion(); // Resume
+        }
+    }
+
+    private void reiniciarSimulacion() {
+        if (timer != null)
+            timer.stop();
+        pausado = false;
+        simulador.reiniciar();
+
+        // Reset UI
+        modeloTabla.setProcesos(simulador.getTodosLosProcesos());
+        vistaMemoria.setMemoria(simulador.getMemoria());
+        panelCPUs.removeAll();
+        panelCPUs.repaint();
+
+        spinnerCPUs.setEnabled(true);
+        btnCargar.setEnabled(true);
+        btnAsignar.setEnabled(false);
+        btnEjecutar.setEnabled(false);
+        btnPausar.setEnabled(false);
+        btnPausar.setText("Pausar");
+        btnReiniciar.setEnabled(false);
+        btnEjecutar.setText("Ejecutar Simulación");
+        lblEstadisticas.setText("Estadísticas: -");
+
+        JOptionPane.showMessageDialog(this, "Simulación reiniciada. Cargue archivos nuevamente.");
     }
 
     private void actualizarVistas() {
@@ -184,6 +256,7 @@ public class VentanaPrincipal extends JFrame {
                 ((VistaCPU) c).actualizar();
             }
         }
+        lblEstadisticas.setText(simulador.getEstadisticas());
     }
 
     public static void main(String[] args) {
