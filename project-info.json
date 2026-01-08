@@ -1,31 +1,54 @@
 {
-    "project": "Simulador de Procesos OS",
-    "description": {
-        "es": "Simulador gráfico de gestión de procesos de sistema operativo desarrollado en Java (Swing), diseñado para visualizar el comportamiento de algoritmos de planificación y gestión de memoria en tiempo real.",
-        "en": "GUI-based OS process management simulator developed in Java (Swing), designed to visualize scheduling algorithms and memory management behavior in real-time."
-    },
-    "tech": [
-        "Java",
-        "Swing",
-        "Multithreading"
-    ],
-    "features": [
-        "Carga masiva de procesos mediante archivos .prs",
-        "Simulación de planificación Round Robin con soporte multinúcleo (1-4 CPUs)",
-        "Gestión de Memoria con estrategia First-Fit (128 bloques)",
-        "Visualización gráfica del estado de la memoria y colas de procesos",
-        "Controles de ejecución: Iniciar, Pausar, Reiniciar",
-        "Soporte para tipos de procesos: Ejecutable, Multimedia y Documento",
-        "Validación de recursos y gestión de estados de procesos (Listo, Ejecución, Espera, Finalizado)"
-    ],
-    "stack": {
-        "language": "Java",
-        "framework": "Swing",
-        "tools": [
-            "JDK 11+",
-            "Maven"
+    "en": {
+        "tech": [
+            "Java",
+            "Swing (GUI)",
+            "Multithreading",
+            "OS Fundamentals"
         ],
-        "database": "N/A"
+        "features": [
+            "Batch process loading via custom .prs files",
+            "Round Robin scheduling simulation (1-4 CPU cores)",
+            "Memory management with First-Fit allocation strategy",
+            "Real-time visualization of memory blocks and process queues",
+            "Full simulation control: Start, Pause, Resume, Reset"
+        ],
+        "stack": {
+            "language": "Java",
+            "framework": "Swing",
+            "tools": [
+                "JDK 11+",
+                "IntelliJ / Eclipse"
+            ],
+            "database": "In-Memory State"
+        },
+        "screenshots": [],
+        "description": "A specialized educational laboratory designed to visualize the internal mechanics of Operating Systems. Developed in Java, the simulator provides a real-time playback of process lifecycles, using multithreaded cores to simulate multitasking via Round Robin scheduling. It includes a complete memory management module that demonstrates the First-Fit allocation strategy across high-density blocks, allowing students and engineers to observe state transitions, resource competition, and fragmentation in a controlled interactive environment."
     },
-    "screenshots": []
+    "es": {
+        "tech": [
+            "Java",
+            "Swing (GUI)",
+            "Multihilos",
+            "Fundamentos de SO"
+        ],
+        "features": [
+            "Carga masiva de procesos mediante archivos .prs personalizados",
+            "Simulación de planificación Round Robin (1-4 núcleos de CPU)",
+            "Gestión de memoria con estrategia de asignación First-Fit",
+            "Visualización en tiempo real de bloques de memoria y colas de procesos",
+            "Control total de simulación: Iniciar, Pausar, Continuar, Reiniciar"
+        ],
+        "stack": {
+            "language": "Java",
+            "framework": "Swing",
+            "tools": [
+                "JDK 11+",
+                "IntelliJ / Eclipse"
+            ],
+            "database": "Estado en Memoria"
+        },
+        "screenshots": [],
+        "description": "Un laboratorio educativo especializado diseñado para visualizar la mecánica interna de los Sistemas Operativos. Desarrollado en Java, el simulador proporciona una reproducción en tiempo real del ciclo de vida de los procesos, utilizando núcleos multihilos para simular la multitarea mediante planificación Round Robin. Incluye un módulo de gestión de memoria que demuestra la estrategia First-Fit, permitiendo observar transiciones de estado, competencia por recursos y fragmentación en un entorno interactivo."
+    }
 }
