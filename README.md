@@ -1,5 +1,7 @@
 ﻿# Simulador de Procesos GUI App
 
+[![CI](https://github.com/Geovanni-Gonzalez/SimuladorDeProcesos-GUI-App/actions/workflows/ci.yml/badge.svg)](https://github.com/Geovanni-Gonzalez/SimuladorDeProcesos-GUI-App/actions/workflows/ci.yml)
+
 ## Descripción
 Simulador gráfico en Java para representar procesos, CPU y memoria, con modelos, lector de archivos y vistas Swing.
 
