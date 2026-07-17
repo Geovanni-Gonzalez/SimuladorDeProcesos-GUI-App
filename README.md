@@ -46,7 +46,7 @@ En PowerShell puede convenir compilar desde un IDE.
 - usuario1.prs: ejemplo
 
 ## Capturas o demo
-![Captura principal](screenshots/principalImage.png)
+![Captura principal](docs/img/principalImage.png)
 
 ## Estado del proyecto
 Proyecto académico funcional.
